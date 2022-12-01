@@ -99,6 +99,60 @@ public:
         }
         head = start;
     }
+    void delete_last(){
+        ///O(N)
+        if(head==NULL){
+            return;
+        }
+        Node *q=head;
+        while (q->nxt->nxt!=NULL){
+            q=q->nxt;
+        }
+        c--;
+        q->nxt=NULL;
+    }
+     void delete_first(){
+        if(head==NULL){
+            return;
+        }
+        head=head->nxt;
+        c--;
+    }
+    void delete_at(int pos){
+        pos--;
+        if(pos==0){
+            delete_first();
+            return;
+        }
+        if(pos+1==c){
+            delete_last();
+            return;
+        }
+        if(!is_valid_position(pos)){
+            return;
+        }
+        Node *q=head;
+        for (int i = 0; i < pos-1; ++i) {
+            q=q->nxt;
+        }
+        q->nxt=q->nxt->nxt;
+    }
+    int search(int value){
+        ///O(N)
+        if(head==NULL){
+            return INT_MIN;
+        }
+        int pos{};
+        Node *q=head;
+        while (q!=NULL){
+            if(q->data==value){
+                return pos;
+            }
+            pos++;
+            q=q->nxt;
+        }
+        return INT_MIN;
+    }
 };
 
 int main() {
@@ -113,4 +167,17 @@ int main() {
     cout << "\n";
     ll.reverse();
     ll.print();
+    cout<<"\n";
+    ll.delete_last();
+    ll.print();
+    cout<<"\n";
+    ll.delete_first();
+    ll.print();
+    cout<<"\n";
+    ll.add_end(40);
+    ll.add_end(403);
+    ll.delete_at(2);
+    ll.print();
+    cout<<ll.search(40);
+
 }
