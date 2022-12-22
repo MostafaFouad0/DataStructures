@@ -60,7 +60,7 @@ namespace ConsoleApp6
         public void add_before(int val,int item) {
             Node tmp = new Node(val);
             Node q = head;
-            if (q.nxt != null) {
+            while (q.nxt != null) {
                 if (q.nxt.data == item) {
                     tmp.nxt = q.nxt;
                     tmp.prev = q;
